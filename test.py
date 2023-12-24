@@ -2,7 +2,7 @@ import numpy as np
 import panadas as pd
 
 def sonarcloud_test4zzy(t):  
-    a = 10
+    a = 10 if t % 2 == 0 else 5
     b = 5
     c = 0 if a == b else 1
     d = 20
