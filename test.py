@@ -13,6 +13,8 @@ def sonarcloud_test4zzy(t):
         print("True")
     if (a + b + c) == d:
         print("True")
+    else:
+        print("What the fuck!")
 
     t = d
 
