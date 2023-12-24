@@ -1,4 +1,37 @@
-1 为什么如果a!=b为真是会报错bug？我感觉如果是为了测试或者是assertion的方法用了判断的不等式，那我觉得这个bug就是不合理的。（Remove this expression which always evaluates to "true".
-Boolean expressions should not be gratuitous）
+1 为什么如果a!=b为真是会报错bug？我感觉如果是为了测试或者是assertion的方法用了判断的不等式，那我觉得这个bug就是不合理的？
+比如我目前只有一个模型，我后续会加入新的模型，但目前只有一个通道，但我这里必须写if判断来判断我当前用的模型是什么？
+那我或许觉得这个a!=b就是不合适的（Remove this expression which always evaluates to "true". Boolean expressions should not be gratuitous）
 
-2  
+2  find all the test results for a certain object, please use the api/ce/activity?component=ProjectKey:
+https://sonarcloud.io/api/ce/activity?component=TinyyTomato_sonarcloud_test4zzy
+
+3 activity 中
+tasks 就是latest activity模块+older activity模块（注意，最新一次的测试如果是passed，那就不会在数据库中记录？因为我最后一次passed的代码不是latest activity中的第一条，很奇怪）
+我自己的字段中没有 "hasErrorStacktrace": false,
+logs==false好像就是正常的，不用担心
+status 描述的是 此次测试是否成功
+executionTimeMs 描述的是测试时间 Ms
+warningCount 描述的就是warnings，但warnings列表里面的内容可能为空？？我不知道是为什么（我这里为空的原因是没有配置好sonarclouds上python的测试环境之类的？我不是很懂是什么意思）
+
+4 没有找到我导入的库是有问题的：
+import panadas as pd
+panadas拼错了，但没有说这个有问题（就是好像不管import的信息）
+
+
+
+
+
+
+
+
+
+1. 配置规则在哪？有没有修改的历史记录？
+2. 规则的fix信息，也就是code changes有没有记录？还是说要自己git找？（那需要知道是什么时候closed的）
+3. excel表格中的数据跟界面对应上（生动
+
+收集信息：
+(1)	获取项目的数据，如项目设置的代码质量检测规则等（每个项目设置的检查规则随着时间变化改变的信息）
+(2)	获取项目的不同版本的质量指标（measurements）、问题（issue）列表（每次push/commits之后的信息-随着时间推移的，我怎么拿到。我不仅要拿到issue，还要知道什么时候创建的）
+(3)	获取问题的描述，如重要性（severity）、修改情况（对于每个issue的fix信息）等
+
+

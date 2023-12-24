@@ -1,5 +1,5 @@
 import numpy as np
-import panadas as pd
+import pandas as pd
 
 def sonarcloud_test4zzy(t):  
     a = 10 if t % 2 == 0 else 5
