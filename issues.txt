@@ -5,7 +5,7 @@
 2  find all the test results for a certain object, please use the api/ce/activity?component=ProjectKey:
 https://sonarcloud.io/api/ce/activity?component=TinyyTomato_sonarcloud_test4zzy
 
-3 activity 中
+在 activity.json 中:
 tasks 就是latest activity模块+older activity模块（注意，最新一次的测试如果是passed，那就不会在数据库中记录？因为我最后一次passed的代码不是latest activity中的第一条，很奇怪）
 我自己的字段中没有 "hasErrorStacktrace": false,
 logs==false好像就是正常的，不用担心
@@ -13,10 +13,65 @@ status 描述的是 此次测试是否成功
 executionTimeMs 描述的是测试时间 Ms
 warningCount 描述的就是warnings，但warnings列表里面的内容可能为空？？我不知道是为什么（我这里为空的原因是没有配置好sonarclouds上python的测试环境之类的？我不是很懂是什么意思）
 
-4 没有找到我导入的库是有问题的：
+3 没有找到我导入的库是有问题的：
 import panadas as pd
-panadas拼错了，但没有说这个有问题（就是好像不管import的信息）
+panadas拼错了，但没有说这个有问题（就是好像不管import的信息的对错，很奇怪？？？）
 
+4 采用下述url request就能获得一个项目（根据project_key确定）的所有历史测试信息
+https://sonarcloud.io/api/issues/search?projects=TinyyTomato_sonarcloud_test4zzy（这里换成自己的project_key）
+(3)	获取问题的描述，如重要性（severity）、修改情况（对于每个issue的fix信息）等（其中上述获取的json文件结果是按照时间排序的(倒叙排列，不过和sonarcloud上的相同，就是最新的在最上面，最老的测试在最下面)，所以可以和所有的commit_id一一对应上）
+我不清楚还要什么fix信息，有需要再提出来。
+对于fix信息来说，"resolution": "FIXED", // 我没有set过这个fixed信息，所以我觉得是automatically完成的（至于论文中说的resolved我忘记在哪里看到过了，但issues.json里面没有）
+                "status": "open", "CLOSED", //set automatically by sonarcloud
+"issues": [
+        {
+            "key": "AYya5JtL4X35g3GUvaVD", //没用
+            "rule": "python:S1854", //有用。但好像只能对code smell用，不能对bugs用（我第一次测试的时候"type"字段是BUG，就搜不到。如果是code smell的话，就可以通过下述url requst 搜索到规则的具体信息）
+            # https://sonarcloud.io/api/rules/search?rule_key=python:S1854（这里更换成你遇到的rule信息）&organization=tinyytomato（这里更换成你测试项目的organization信息）
+            "severity": "MAJOR", //有用
+            "component": "TinyyTomato_sonarcloud_test4zzy:test.py", //有用，知道github's repo名字+修改的是哪个文件（这里没有显示文件夹的原因是.py文件就在最外层，如果有文件夹嵌套那就应该类似于：/code/test.py）
+            "project": "TinyyTomato_sonarcloud_test4zzy", //有用
+            "hash": "1e4757a23581ae8bee81560dd428f8d8", //没用，这个不是github的commit_id，是sonarcloud的
+            "textRange": { //有用？确定修改的代码行
+                "startLine": 19,
+                "endLine": 19,
+                "startOffset": 4,
+                "endOffset": 9
+            },
+            "flows": [], //不知道是什么东西
+            "resolution": "FIXED", //疑问？我不是特别清楚
+            "status": "CLOSED", //有用
+            "message": "Remove this assignment to local variable \u0027t\u0027; the value is never used.", //有用。这message属性是自动生成的（由sonarcloud提供），解释了此次代码更改（code changes）的自然语言信息（正确解析之后的句子意思：移除对本地变量 't' 的赋值；该值从未被使用。）
+            "effort": "1min", //看着没用
+            "debt": "1min", //看着没用
+            "assignee": "TinyyTomato@github", //看着没用（又不找人）
+            "author": "1872401992@qq.com", //看着没用（也不发联系人邮箱吧）
+            //这个tags代表了我此次测试的标签吧（具体查看web_api中：get api/issues/tags中的内容，有以下几个选项："tags": ["convention", "security", "cwe"]），不过我不清楚什么是unused。不过我实在没搞懂为什么会出现cwe，难道这个也能被attackers利用从而攻击？？（随便说说）
+            "tags": [
+                "cwe",
+                "unused"
+            ],
+            "creationDate": "2023-12-24T09:15:12+0100", //字面意思，有用
+            "updateDate": "2023-12-24T09:19:20+0100", //字面意思，有用
+            "closeDate": "2023-12-24T09:19:20+0100", //字面意思，有用
+            "type": "CODE_SMELL", //有用
+            "organization": "tinyytomato", //用户所属的organization，不知道有没有用
+            "cleanCodeAttribute": "LOGICAL", //不知道是什么意思（字面意思很奇怪啊？？），还遇到过CLEAR信息，我有点点迷惑，或许需要再看看。
+            "cleanCodeAttributeCategory": "INTENTIONAL", //不知道什么意思（字面意思很奇怪啊？？），我测试的代码都是 intentional，难道是发现我是故意将代码写错的？
+            "impacts": [
+                {
+                    "softwareQuality": "MAINTAINABILITY", //有用
+                    "severity": "MEDIUM" //有用
+                }
+            ]
+        }
+    ]
+
+想要获取项目的具体代码建议通过步骤2中的activity获取项目的github名字（componentKey），然后直接通过github获取。
+或者就是通过sonarcloud获取，用之前SVC4PC的代码，但是要注意限制：代码不能太长，即不能超过最大规定“页码”（未尝试），不然的话需要分页获取，还挺麻烦的感觉。
+
+5 采用下述url request感觉是没有任何用处的，感觉没有可以分析的信息
+https://sonarcloud.io/api/project_analyses/search?project=TinyyTomato_sonarcloud_test4zzy
 
 
 
@@ -32,6 +87,6 @@ panadas拼错了，但没有说这个有问题（就是好像不管import的信�
 收集信息：
 (1)	获取项目的数据，如项目设置的代码质量检测规则等（每个项目设置的检查规则随着时间变化改变的信息）
 (2)	获取项目的不同版本的质量指标（measurements）、问题（issue）列表（每次push/commits之后的信息-随着时间推移的，我怎么拿到。我不仅要拿到issue，还要知道什么时候创建的）
-(3)	获取问题的描述，如重要性（severity）、修改情况（对于每个issue的fix信息）等
+
 
 

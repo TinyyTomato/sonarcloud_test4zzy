@@ -3,15 +3,15 @@ import pandas as pd
 
 def sonarcloud_test4zzy(t):  
     a = 10 if t % 2 == 0 else 5
-    b = 5
-    c = 0 if a == b else 5
+    e = 5
+    c = 0 if a == e else 5
     d = 20
 
-    if a != b:
+    if a != e:
         print("True")
-    if b == c:
+    if e == c:
         print("True")
-    if (a + b + c) == d:
+    if (a + e + c) == d:
         print("True")
     else:
         print("What the fuck!")
