@@ -1,0 +1,489 @@
+{
+    "repositories": [
+        {
+            "key": "abap",
+            "name": "Sonar",
+            "language": "abap"
+        },
+        {
+            "key": "apex",
+            "name": "Sonar",
+            "language": "apex"
+        },
+        {
+            "key": "azureresourcemanager",
+            "name": "Sonar",
+            "language": "azureresourcemanager"
+        },
+        {
+            "key": "c",
+            "name": "Sonar",
+            "language": "c"
+        },
+        {
+            "key": "cloudformation",
+            "name": "Sonar",
+            "language": "cloudformation"
+        },
+        {
+            "key": "cobol",
+            "name": "Sonar",
+            "language": "cobol"
+        },
+        {
+            "key": "common-abap",
+            "name": "Common ABAP",
+            "language": "abap"
+        },
+        {
+            "key": "common-apex",
+            "name": "Common Apex",
+            "language": "apex"
+        },
+        {
+            "key": "common-c",
+            "name": "Common C",
+            "language": "c"
+        },
+        {
+            "key": "common-cobol",
+            "name": "Common COBOL",
+            "language": "cobol"
+        },
+        {
+            "key": "common-cpp",
+            "name": "Common C++",
+            "language": "cpp"
+        },
+        {
+            "key": "common-cs",
+            "name": "Common C#",
+            "language": "cs"
+        },
+        {
+            "key": "common-flex",
+            "name": "Common Flex",
+            "language": "flex"
+        },
+        {
+            "key": "common-go",
+            "name": "Common Go",
+            "language": "go"
+        },
+        {
+            "key": "common-java",
+            "name": "Common Java",
+            "language": "java"
+        },
+        {
+            "key": "common-js",
+            "name": "Common JavaScript",
+            "language": "js"
+        },
+        {
+            "key": "common-kotlin",
+            "name": "Common Kotlin",
+            "language": "kotlin"
+        },
+        {
+            "key": "common-objc",
+            "name": "Common Objective-C",
+            "language": "objc"
+        },
+        {
+            "key": "common-php",
+            "name": "Common PHP",
+            "language": "php"
+        },
+        {
+            "key": "common-pli",
+            "name": "Common PL/I",
+            "language": "pli"
+        },
+        {
+            "key": "common-plsql",
+            "name": "Common PL/SQL",
+            "language": "plsql"
+        },
+        {
+            "key": "common-py",
+            "name": "Common Python",
+            "language": "py"
+        },
+        {
+            "key": "common-rpg",
+            "name": "Common RPG",
+            "language": "rpg"
+        },
+        {
+            "key": "common-ruby",
+            "name": "Common Ruby",
+            "language": "ruby"
+        },
+        {
+            "key": "common-scala",
+            "name": "Common Scala",
+            "language": "scala"
+        },
+        {
+            "key": "common-swift",
+            "name": "Common Swift",
+            "language": "swift"
+        },
+        {
+            "key": "common-ts",
+            "name": "Common TypeScript",
+            "language": "ts"
+        },
+        {
+            "key": "common-tsql",
+            "name": "Common T-SQL",
+            "language": "tsql"
+        },
+        {
+            "key": "common-vb",
+            "name": "Common Vb",
+            "language": "vb"
+        },
+        {
+            "key": "common-vbnet",
+            "name": "Common VB.NET",
+            "language": "vbnet"
+        },
+        {
+            "key": "cpp",
+            "name": "Sonar",
+            "language": "cpp"
+        },
+        {
+            "key": "csharpsquid",
+            "name": "Sonar",
+            "language": "cs"
+        },
+        {
+            "key": "css",
+            "name": "SonarQube",
+            "language": "css"
+        },
+        {
+            "key": "docker",
+            "name": "Sonar",
+            "language": "docker"
+        },
+        {
+            "key": "external_android-lint",
+            "name": "Android Lint",
+            "language": "kotlin"
+        },
+        {
+            "key": "external_bandit",
+            "name": "Bandit",
+            "language": "py"
+        },
+        {
+            "key": "external_cfn-lint",
+            "name": "CFN-LINT",
+            "language": "cloudformation"
+        },
+        {
+            "key": "external_checkstyle",
+            "name": "Checkstyle",
+            "language": "java"
+        },
+        {
+            "key": "external_detekt",
+            "name": "detekt",
+            "language": "kotlin"
+        },
+        {
+            "key": "external_eslint_repo",
+            "name": "ESLint",
+            "language": "js"
+        },
+        {
+            "key": "external_fbcontrib",
+            "name": "fb-contrib",
+            "language": "java"
+        },
+        {
+            "key": "external_findsecbugs",
+            "name": "FindSecBugs",
+            "language": "java"
+        },
+        {
+            "key": "external_flake8",
+            "name": "Flake8",
+            "language": "py"
+        },
+        {
+            "key": "external_golint",
+            "name": "Golint",
+            "language": "go"
+        },
+        {
+            "key": "external_govet",
+            "name": "go vet",
+            "language": "go"
+        },
+        {
+            "key": "external_hadolint",
+            "name": "HADOLINT",
+            "language": "docker"
+        },
+        {
+            "key": "external_ktlint",
+            "name": "ktlint",
+            "language": "kotlin"
+        },
+        {
+            "key": "external_mypy",
+            "name": "Mypy",
+            "language": "py"
+        },
+        {
+            "key": "external_phpstan",
+            "name": "PHPStan",
+            "language": "php"
+        },
+        {
+            "key": "external_pmd",
+            "name": "PMD",
+            "language": "java"
+        },
+        {
+            "key": "external_pmd_apex",
+            "name": "PMD",
+            "language": "apex"
+        },
+        {
+            "key": "external_psalm",
+            "name": "Psalm",
+            "language": "php"
+        },
+        {
+            "key": "external_pylint",
+            "name": "Pylint",
+            "language": "py"
+        },
+        {
+            "key": "external_rubocop",
+            "name": "RuboCop",
+            "language": "ruby"
+        },
+        {
+            "key": "external_ruff",
+            "name": "Ruff",
+            "language": "py"
+        },
+        {
+            "key": "external_scalastyle",
+            "name": "Scalastyle",
+            "language": "scala"
+        },
+        {
+            "key": "external_scapegoat",
+            "name": "Scapegoat",
+            "language": "scala"
+        },
+        {
+            "key": "external_spotbugs",
+            "name": "SpotBugs",
+            "language": "java"
+        },
+        {
+            "key": "external_stylelint",
+            "name": "stylelint",
+            "language": "css"
+        },
+        {
+            "key": "external_swiftlint",
+            "name": "SwiftLint",
+            "language": "swift"
+        },
+        {
+            "key": "external_tflint",
+            "name": "TFLINT",
+            "language": "terraform"
+        },
+        {
+            "key": "external_tslint_repo",
+            "name": "TSLint",
+            "language": "ts"
+        },
+        {
+            "key": "external_valgrind-c",
+            "name": "Valgrind",
+            "language": "c"
+        },
+        {
+            "key": "external_valgrind-cpp",
+            "name": "Valgrind",
+            "language": "cpp"
+        },
+        {
+            "key": "external_valgrind-objc",
+            "name": "Valgrind",
+            "language": "objc"
+        },
+        {
+            "key": "flex",
+            "name": "Sonar",
+            "language": "flex"
+        },
+        {
+            "key": "go",
+            "name": "Sonar",
+            "language": "go"
+        },
+        {
+            "key": "java",
+            "name": "Sonar",
+            "language": "java"
+        },
+        {
+            "key": "javabugs",
+            "name": "Dataflow Bug Detection SonarAnalyzer",
+            "language": "java"
+        },
+        {
+            "key": "javascript",
+            "name": "Sonar",
+            "language": "js"
+        },
+        {
+            "key": "javasecurity",
+            "name": "Security SonarAnalyzer",
+            "language": "java"
+        },
+        {
+            "key": "jssecurity",
+            "name": "Security SonarAnalyzer",
+            "language": "js"
+        },
+        {
+            "key": "kotlin",
+            "name": "Sonar",
+            "language": "kotlin"
+        },
+        {
+            "key": "kubernetes",
+            "name": "Sonar",
+            "language": "kubernetes"
+        },
+        {
+            "key": "objc",
+            "name": "Sonar",
+            "language": "objc"
+        },
+        {
+            "key": "php",
+            "name": "Sonar",
+            "language": "php"
+        },
+        {
+            "key": "phpsecurity",
+            "name": "Security SonarAnalyzer",
+            "language": "php"
+        },
+        {
+            "key": "pli",
+            "name": "Sonar",
+            "language": "pli"
+        },
+        {
+            "key": "plsql",
+            "name": "Sonar",
+            "language": "plsql"
+        },
+        {
+            "key": "python",
+            "name": "Sonar",
+            "language": "py"
+        },
+        {
+            "key": "pythonbugs",
+            "name": "Dataflow Bug Detection SonarAnalyzer",
+            "language": "py"
+        },
+        {
+            "key": "pythonsecurity",
+            "name": "Security SonarAnalyzer",
+            "language": "py"
+        },
+        {
+            "key": "roslyn.sonaranalyzer.security.cs",
+            "name": "Security SonarAnalyzer",
+            "language": "cs"
+        },
+        {
+            "key": "rpg",
+            "name": "Sonar",
+            "language": "rpg"
+        },
+        {
+            "key": "ruby",
+            "name": "Sonar",
+            "language": "ruby"
+        },
+        {
+            "key": "scala",
+            "name": "Sonar",
+            "language": "scala"
+        },
+        {
+            "key": "secrets",
+            "name": "Sonar Secrets Analyzer",
+            "language": "secrets"
+        },
+        {
+            "key": "swift",
+            "name": "SonarQube",
+            "language": "swift"
+        },
+        {
+            "key": "terraform",
+            "name": "Sonar",
+            "language": "terraform"
+        },
+        {
+            "key": "text",
+            "name": "Sonar",
+            "language": "text"
+        },
+        {
+            "key": "tsql",
+            "name": "Sonar",
+            "language": "tsql"
+        },
+        {
+            "key": "tssecurity",
+            "name": "Security SonarAnalyzer",
+            "language": "ts"
+        },
+        {
+            "key": "typescript",
+            "name": "Sonar",
+            "language": "ts"
+        },
+        {
+            "key": "vb",
+            "name": "Sonar",
+            "language": "vb"
+        },
+        {
+            "key": "vbnet",
+            "name": "Sonar",
+            "language": "vbnet"
+        },
+        {
+            "key": "Web",
+            "name": "Sonar",
+            "language": "web"
+        },
+        {
+            "key": "xml",
+            "name": "Sonar",
+            "language": "xml"
+        }
+    ]
+}

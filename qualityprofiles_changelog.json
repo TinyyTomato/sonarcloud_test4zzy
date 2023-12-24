@@ -1,0 +1,48 @@
+{
+    "total": 4,
+    "p": 1,
+    "ps": 50,
+    "events": [
+        {
+            "date": "2015-11-03T15:27:16+0100",
+            "action": "ACTIVATED",
+            "ruleKey": "json:tab-character",
+            "ruleName": "Tabulation characters should not be used",
+            "impacts": [],
+            "params": {
+                "severity": "MINOR"
+            }
+        },
+        {
+            "date": "2015-11-03T15:27:16+0100",
+            "action": "ACTIVATED",
+            "ruleKey": "json:S2260",
+            "ruleName": "JSON parser failure",
+            "impacts": [],
+            "params": {
+                "severity": "CRITICAL"
+            }
+        },
+        {
+            "date": "2015-11-03T15:27:16+0100",
+            "action": "ACTIVATED",
+            "ruleKey": "json:empty-line-end-of-file",
+            "ruleName": "Files should contain an empty new line at the end",
+            "impacts": [],
+            "params": {
+                "severity": "MINOR"
+            }
+        },
+        {
+            "date": "2015-11-03T15:27:16+0100",
+            "action": "ACTIVATED",
+            "ruleKey": "json:S1578",
+            "ruleName": "File names should comply with a naming convention",
+            "impacts": [],
+            "params": {
+                "severity": "MINOR",
+                "format": "^[A-Za-z][-_A-Za-z0-9]*\\.json$"
+            }
+        }
+    ]
+}

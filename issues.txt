@@ -1,9 +1,13 @@
+# 按照时间推移的瞬息，我在写这个文档的时候测试了7次，具体情况需要自己核对一下。
+
 # 我public的repo的commit message落后于sonarcloud上一个时间戳，所以在github上显示是7，但本质在sonarcloud已经测试8次了
 link：https://github.com/TinyyTomato/sonarcloud_test4zzy.git
 
 1 为什么如果a!=b为真是会报错bug？我感觉如果是为了测试或者是assertion的方法用了判断的不等式，那我觉得这个bug就是不合理的？
 比如我目前只有一个模型，我后续会加入新的模型，但目前只有一个通道，但我这里必须写if判断来判断我当前用的模型是什么？
 那我或许觉得这个a!=b就是不合适的（Remove this expression which always evaluates to "true". Boolean expressions should not be gratuitous）
+
+1.5 如果本身a!=b这段代码会导致bug或者code smell,那么如果将a和b换成其他的变量名也是相同的效果。我这里单纯做的就是将原来的a和b名字改成了c和d，但我觉得这个具体还是得看代码的作用，sonarcloud是真的在分析代码，而不是在胡乱搞。
 
 2  find all the test results for a certain object, please use the api/ce/activity?component=ProjectKey:
 https://sonarcloud.io/api/ce/activity?component=TinyyTomato_sonarcloud_test4zzy
@@ -23,14 +27,16 @@ panadas拼错了，但没有说这个有问题（就是好像不管import的信�
 4 采用下述url request就能获得一个项目（根据project_key确定）的所有历史测试信息
 https://sonarcloud.io/api/issues/search?projects=TinyyTomato_sonarcloud_test4zzy（这里换成自己的project_key）
 (3)	获取问题的描述，如重要性（severity）、修改情况（对于每个issue的fix信息）等（其中上述获取的json文件结果是按照时间排序的(倒叙排列，不过和sonarcloud上的相同，就是最新的在最上面，最老的测试在最下面)，所以可以和所有的commit_id一一对应上）
-我不清楚还要什么fix信息，有需要再提出来。
+
+我不知道这个sonarcloud中对于closed的评判标准是什么，感觉是有点奇怪的，因为我中间测试的代码居然也给我显示了closed，不大合理啊！！！！（或许这就是研究的意义？？哪些是真正的closed，哪些不是？？？）
+
 对于fix信息来说，"resolution": "FIXED", // 我没有set过这个fixed信息，所以我觉得是automatically完成的（至于论文中说的resolved我忘记在哪里看到过了，但issues.json里面没有）
                 "status": "open", "CLOSED", //set automatically by sonarcloud
 "issues": [
         {
             "key": "AYya5JtL4X35g3GUvaVD", //没用
-            "rule": "python:S1854", //有用。但好像只能对code smell用，不能对bugs用（我第一次测试的时候"type"字段是BUG，就搜不到。如果是code smell的话，就可以通过下述url requst 搜索到规则的具体信息）
-            # https://sonarcloud.io/api/rules/search?rule_key=python:S1854（这里更换成你遇到的rule信息）&organization=tinyytomato（这里更换成你测试项目的organization信息）
+            "rule": "python:S1854", //有用。可以通过下述url requst 搜索到规则的具体信息 # https://sonarcloud.io/api/rules/search?rule_key=python:S1854（这里更换成你遇到的rule信息）&organization=tinyytomato（这里更换成你测试项目的organization信息）
+            # Attention: 上述的attention是指：某个项目某次测试违反的规则，并不是该项目配置的规则
             "severity": "MAJOR", //有用
             "component": "TinyyTomato_sonarcloud_test4zzy:test.py", //有用，知道github's repo名字+修改的是哪个文件（这里没有显示文件夹的原因是.py文件就在最外层，如果有文件夹嵌套那就应该类似于：/code/test.py）
             "project": "TinyyTomato_sonarcloud_test4zzy", //有用
@@ -54,13 +60,13 @@ https://sonarcloud.io/api/issues/search?projects=TinyyTomato_sonarcloud_test4zzy
                 "cwe",
                 "unused"
             ],
-            "creationDate": "2023-12-24T09:15:12+0100", //字面意思，有用
-            "updateDate": "2023-12-24T09:19:20+0100", //字面意思，有用
-            "closeDate": "2023-12-24T09:19:20+0100", //字面意思，有用
+            "creationDate": "2023-12-24T09:15:12+0100", //字面意思，有用。是sonarcloud上此项目的创建时间
+            "updateDate": "2023-12-24T09:19:20+0100", //字面意思，有用。是sonarcloud上此项目的更新时间
+            "closeDate": "2023-12-24T09:19:20+0100", //字面意思，有用。是sonarcloud上此项目的closed时间
             "type": "CODE_SMELL", //有用
             "organization": "tinyytomato", //用户所属的organization，不知道有没有用
-            "cleanCodeAttribute": "LOGICAL", //不知道是什么意思（字面意思很奇怪啊？？），还遇到过CLEAR信息，我有点点迷惑，或许需要再看看。
-            "cleanCodeAttributeCategory": "INTENTIONAL", //不知道什么意思（字面意思很奇怪啊？？），我测试的代码都是 intentional，难道是发现我是故意将代码写错的？
+            "cleanCodeAttribute": "LOGICAL", //不知道是什么意思（字面意思很奇怪啊？？），还遇到过CLEAR信息，我有点点迷惑，或许需要再研究看看？
+            "cleanCodeAttributeCategory": "INTENTIONAL", //不知道什么意思（字面意思很奇怪啊？？），我测试的代码都是 intentional，原因也很简单，就是因为我的代码有问题的地方都是在于我的if判断只走一条路，所以是这个代码指向性的问题
             "impacts": [
                 {
                     "softwareQuality": "MAINTAINABILITY", //有用
@@ -70,26 +76,97 @@ https://sonarcloud.io/api/issues/search?projects=TinyyTomato_sonarcloud_test4zzy
         }
     ]
 
-想要获取项目的具体代码建议通过步骤2中的activity获取项目的github名字（componentKey），然后直接通过github获取。
-或者就是通过sonarcloud获取，用之前SVC4PC的代码，但是要注意限制：代码不能太长，即不能超过最大规定“页码”（未尝试），不然的话需要分页获取，还挺麻烦的感觉。
+有的时候可能会有：
+"flows": [
+                {
+                    "locations": [
+                        {
+                            "component": "TinyyTomato_sonarcloud_test4zzy:test.py",
+                            "textRange": {
+                                "startLine": 15,
+                                "endLine": 15,
+                                "startOffset": 8,
+                                "endOffset": 21
+                            },
+                            "msg": "Unreachable code"
+                        }
+                    ]
+                }
+            ],
+我没搞懂这个flows是什么意思，但msg确实是真的，和外面的message是一个效果。
 
-5 采用下述url request感觉是没有任何用处的，感觉没有可以分析的信息
+想要获取项目的具体代码建议通过步骤2中的activity获取项目的github名字（componentKey），然后直接通过github获取。
+或者就是通过sonarcloud获取，用之前SVCP4C（一篇论文，github地址：https://github.com/uleroboticsgroup/SVCP4C）的代码，但是要注意限制：代码不能太长，即不能超过最大规定“页码”（未尝试），不然的话需要分页获取，还挺麻烦的感觉。
+
+5 采用下述url request感觉是没有任何用处的，感觉没有可以分析的信息，不过字段名字倒是很真？？不确定的话，可以再看下（有几个字段我感觉有用但好像我不知道是什么意思：events，projectVersion，revision(特别是这个)）
 https://sonarcloud.io/api/project_analyses/search?project=TinyyTomato_sonarcloud_test4zzy
 
+6 规则的fix信息如何查看以及历史的演变？？（以vscode-python项目为例子）
+1）没用：GET api/qualityprofiles/backup：以 XML 形式备份质量配置文件。 导出的配置文件可以通过 api/qualityprofiles/restore 恢复。
+提示：2）和3）需要用到测试项目的information信息（在每个测试项目的左下角），示例：
+Quality profiles used
+    JSON       SonarQube Way
+    Python     Sonar way
+    TypeScript Sonar way
+2）无敌有用：GET api/qualityprofiles/changelog：获取质量配置文件的更改历史记录：规则激活/停用、参数/严重性更改。 事件按日期降序排列（最近的在前）。
+两个例子，注意qualityProfile=后面字段的大小写问题！！：
+https://sonarcloud.io/api/qualityprofiles/changelog?qualityProfile=SonarQube%20Way&language=json&organization=microsoft
+https://sonarcloud.io/api/qualityprofiles/changelog?qualityProfile=Sonar%20way&language=py&organization=microsoft
+3）感觉没用吧？：GET api/qualityprofiles/export：导出质量配置文件。
+eg：
+https://sonarcloud.io/api/qualityprofiles/export?qualityProfile=SonarQube%20Way&language=json&organization=microsoft，导出如下：
+该 XML 文件并未包含任何关联的样式信息。文档树显示如下。
+<profile>
+<name>SonarQube Way</name>
+<language>json</language>
+<rules/>
+</profile>
+
+但我感觉这个api应该不是很重要，感觉用不到，对吗？
+
+4）感觉没用吧？：GET api/qualityprofiles/exporters：列出可用的配置文件导出格式。（感觉对于自动化爬取项目是有用的，但我感觉导出的结果是不符合预期的，同时有些结果我不是很看得懂为什么会出现）
+eg:
+https://sonarcloud.io/api/qualityprofiles/exporters?organization=microsoft
+
+但我感觉这个api应该不是很重要，感觉用不到，对吗？
+
+5）没用？：GET api/qualityprofiles/importers：
+eg：
+https://sonarcloud.io/api/qualityprofiles/importers?organization=microsoft
+（返回结果是空）
+
+但我感觉这个api应该不是很重要，感觉用不到，对吗？
+
+6）感觉没用吧？：GET api/qualityprofiles/inheritance：显示祖先和孩子的品质档案。
+eg:
+https://sonarcloud.io/api/qualityprofiles/inheritance?qualityProfile=Sonar%20way&language=py&organization=microsoft
+
+7）没用吧？：GET api/qualityprofiles/projects：列出项目及其关于质量概况的关联状态
+eg:
+https://sonarcloud.io/api/qualityprofiles/projects?key=AWiVr-jnwLm-hKbaiLms（根据qualityprofiles_search.json中的key关键字进行替换即可）&organization=microsoft
+
+8）无敌有用？：GET api/qualityprofiles/search：搜索质量档案
+eg:
+https://sonarcloud.io/api/qualityprofiles/search?organization=microsoft
+
+9）无敌有用？：GET api/rules/show：Get detailed information about a rule.
+eg:
+https://sonarcloud.io/api/rules/show?key=python:S1854&organization=microsoft
+配合api_issues_searchprojects.json中的rule字段食用，key=rule，organization替换成自己想要搜索的
+但我感觉这是对一个特定规则的阐述，好像不是某个rule的细节rule，是细节rule的explanation（我自己的理解）
+
+10）无敌有用：GET api/rules/search：Search for a collection of relevant rules matching a specified query.
+eg:
+https://sonarcloud.io/api/rules/search?avtivation=true（不要改这里，保持不动）&organization=microsoft&qprofile=AWiVr-jnwLm-hKbaiLmd（结合qualitprofiles_search.json中的key信息进行替换）
+
+11）可以进行筛选，应该有用：GET api/rules/repositories：List available rule repositories
+eg:
+https://sonarcloud.io/api/rules/repositories?organization=microsoft
 
 
+7 获取项目的不同版本的质量指标（measurements）
+https://sonarcloud.io/api/measures/component?componentKey=TinyyTomato_sonarcloud_test4zzy（换成自己的componentKey，见上2）&metricKeys=ncloc,complexity,violations（metrics肯定不止只三个，我随便试了一个vulnerabilities就是对的，code_smells，bugs也是如此，所以我猜测一些传统的metrics都是存在的，那么请根据自己的需要修改对应的请求metrics）
+但需要注意的是，上述请求的方式是获取了当前最新的measurements的情况（别问我是怎么知道的），那么如果需要获取所有历史版本的情况，请使用下述url：
+https://sonarcloud.io/api/measures/search_history?component=TinyyTomato_sonarcloud_test4zzy（换成自己的componentKey，见上2）&metrics=ncloc,complexity,violations,vulnerabilities,code_smells,bugs
 
-
-
-
-
-1. 配置规则在哪？有没有修改的历史记录？
-2. 规则的fix信息，也就是code changes有没有记录？还是说要自己git找？（那需要知道是什么时候closed的）
-3. excel表格中的数据跟界面对应上（生动
-
-收集信息：
-(1)	获取项目的数据，如项目设置的代码质量检测规则等（每个项目设置的检查规则随着时间变化改变的信息）
-(2)	获取项目的不同版本的质量指标（measurements）、问题（issue）列表（每次push/commits之后的信息-随着时间推移的，我怎么拿到。我不仅要拿到issue，还要知道什么时候创建的）
-
-
-
+有用必定有用，无敌有用必定有用但不一定无敌，没用？大概率是没用，感觉没用吧？表示不确定，可能有联动的效果。
