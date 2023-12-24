@@ -6,7 +6,6 @@ def sonarcloud_test4zzy(t):
     b = 5
     c = 5
     d = 20
-    t = d
 
     if a != b:
         print("True")
@@ -14,6 +13,8 @@ def sonarcloud_test4zzy(t):
         print("True")
     if (a + b + c) == d:
         print("True")
+
+    t = d
 
 
 t = 100
