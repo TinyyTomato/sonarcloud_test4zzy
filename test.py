@@ -17,6 +17,7 @@ def sonarcloud_test4zzy(t):
         print("What the fuck!")
 
     t = d
+    print(t)
 
 
 t = 100
