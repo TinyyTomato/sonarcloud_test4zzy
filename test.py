@@ -4,7 +4,7 @@ import panadas as pd
 def sonarcloud_test4zzy(t):  
     a = 10
     b = 5
-    c = 5
+    c = 0 if a == b else 1
     d = 20
 
     if a != b:
