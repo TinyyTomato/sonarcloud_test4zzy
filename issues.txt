@@ -1,3 +1,6 @@
+# 我public的repo的commit message落后于sonarcloud上一个时间戳，所以在github上显示是7，但本质在sonarcloud已经测试8次了
+link：https://github.com/TinyyTomato/sonarcloud_test4zzy.git
+
 1 为什么如果a!=b为真是会报错bug？我感觉如果是为了测试或者是assertion的方法用了判断的不等式，那我觉得这个bug就是不合理的？
 比如我目前只有一个模型，我后续会加入新的模型，但目前只有一个通道，但我这里必须写if判断来判断我当前用的模型是什么？
 那我或许觉得这个a!=b就是不合适的（Remove this expression which always evaluates to "true". Boolean expressions should not be gratuitous）

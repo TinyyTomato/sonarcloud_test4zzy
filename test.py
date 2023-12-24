@@ -2,16 +2,16 @@ import numpy as np
 import pandas as pd
 
 def sonarcloud_test4zzy(t):  
-    a = 10 if t % 2 == 0 else 5
+    dd = 5
     e = 5
-    c = 0 if a == e else 5
+    c = 5 if dd == e else 0
     d = 20
 
-    if a != e:
+    if dd != e:
         print("True")
     if e == c:
         print("True")
-    if (a + e + c) == d:
+    if (dd + e + c) == d:
         print("True")
     else:
         print("What the fuck!")
