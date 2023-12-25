@@ -1,3 +1,16 @@
+例子：
+Quality gate used 
+    Sonar way
+Quality profiles used
+    JSON SonarQube Way
+    Python Sonar way
+    TypeScript Sonar way
+
+Project Key 
+    microsoft_vscode-python
+Organization Key 
+    microsoft
+
 # 按照时间推移的瞬息，我在写这个文档的时候测试了7次，具体情况需要自己核对一下。
 
 # 我public的repo的commit message落后于sonarcloud上一个时间戳，所以在github上显示是7，但本质在sonarcloud已经测试8次了
@@ -103,6 +116,9 @@ https://sonarcloud.io/api/project_analyses/search?project=TinyyTomato_sonarcloud
 
 6 规则的fix信息如何查看以及历史的演变？？（以vscode-python项目为例子）
 1）没用：GET api/qualityprofiles/backup：以 XML 形式备份质量配置文件。 导出的配置文件可以通过 api/qualityprofiles/restore 恢复。
+eg：https://sonarcloud.io/api/qualityprofiles/backup?organization=microsoft
+但界面显示找不到根元素，超级奇怪。
+
 提示：2）和3）需要用到测试项目的information信息（在每个测试项目的左下角），示例：
 Quality profiles used
     JSON       SonarQube Way
@@ -163,10 +179,20 @@ https://sonarcloud.io/api/rules/search?avtivation=true（不要改这里，保�
 eg:
 https://sonarcloud.io/api/rules/repositories?organization=microsoft
 
-
 7 获取项目的不同版本的质量指标（measurements）
 https://sonarcloud.io/api/measures/component?componentKey=TinyyTomato_sonarcloud_test4zzy（换成自己的componentKey，见上2）&metricKeys=ncloc,complexity,violations（metrics肯定不止只三个，我随便试了一个vulnerabilities就是对的，code_smells，bugs也是如此，所以我猜测一些传统的metrics都是存在的，那么请根据自己的需要修改对应的请求metrics）
 但需要注意的是，上述请求的方式是获取了当前最新的measurements的情况（别问我是怎么知道的），那么如果需要获取所有历史版本的情况，请使用下述url：
 https://sonarcloud.io/api/measures/search_history?component=TinyyTomato_sonarcloud_test4zzy（换成自己的componentKey，见上2）&metrics=ncloc,complexity,violations,vulnerabilities,code_smells,bugs
+
+8 请注意：qualitygate != qualityprofile
+使用下述url可以进行qualitygate的请求：
+https://sonarcloud.io/api/qualitygates/get_by_project?organization=microsoft（进行相应的替换）&project=microsoft_vscode-python（进行相应的替换）
+eg：
+Quality gate used
+    Sonar way
+
+所以我感觉应该不是去研究qualitygates，你觉得呢？
+
+9 到底是rules？？还是qualityprofiles？？？
 
 有用必定有用，无敌有用必定有用但不一定无敌，没用？大概率是没用，感觉没用吧？表示不确定，可能有联动的效果。
