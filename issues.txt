@@ -1,6 +1,7 @@
-例子：
+例子：microsoft_vscode-python
 Quality gate used 
     Sonar way
+
 Quality profiles used
     JSON SonarQube Way
     Python Sonar way
@@ -8,6 +9,7 @@ Quality profiles used
 
 Project Key 
     microsoft_vscode-python
+
 Organization Key 
     microsoft
 
@@ -16,11 +18,13 @@ Organization Key
 # 我public的repo的commit message落后于sonarcloud上一个时间戳，所以在github上显示是7，但本质在sonarcloud已经测试8次了
 link：https://github.com/TinyyTomato/sonarcloud_test4zzy.git
 
-1 为什么如果a!=b为真是会报错bug？我感觉如果是为了测试或者是assertion的方法用了判断的不等式，那我觉得这个bug就是不合理的？
+1 为什么如果a!=b为真是会报错bug？(正常的现象——规则设置原因)
+我感觉如果是为了测试或者是assertion的方法用了判断的不等式，那我觉得这个bug就是不合理的？
 比如我目前只有一个模型，我后续会加入新的模型，但目前只有一个通道，但我这里必须写if判断来判断我当前用的模型是什么？
 那我或许觉得这个a!=b就是不合适的（Remove this expression which always evaluates to "true". Boolean expressions should not be gratuitous）
 
 1.5 如果本身a!=b这段代码会导致bug或者code smell,那么如果将a和b换成其他的变量名也是相同的效果。我这里单纯做的就是将原来的a和b名字改成了c和d，但我觉得这个具体还是得看代码的作用，sonarcloud是真的在分析代码，而不是在胡乱搞。
+(他们的issue id一样吗？？？？？？？？？？？？？)
 
 2  find all the test results for a certain object, please use the api/ce/activity?component=ProjectKey:
 https://sonarcloud.io/api/ce/activity?component=TinyyTomato_sonarcloud_test4zzy
@@ -43,13 +47,15 @@ https://sonarcloud.io/api/issues/search?projects=TinyyTomato_sonarcloud_test4zzy
 
 我不知道这个sonarcloud中对于closed的评判标准是什么，感觉是有点奇怪的，因为我中间测试的代码居然也给我显示了closed，不大合理啊！！！！（或许这就是研究的意义？？哪些是真正的closed，哪些不是？？？）
 
+（如果把一个bug的地方直接删掉，那之前的记录还在吗？resolution是什么状态？state是什么状态？）
 对于fix信息来说，"resolution": "FIXED", // 我没有set过这个fixed信息，所以我觉得是automatically完成的（至于论文中说的resolved我忘记在哪里看到过了，但issues.json里面没有）
                 "status": "open", "CLOSED", //set automatically by sonarcloud
+                
 "issues": [
         {
             "key": "AYya5JtL4X35g3GUvaVD", //没用
             "rule": "python:S1854", //有用。可以通过下述url requst 搜索到规则的具体信息 # https://sonarcloud.io/api/rules/search?rule_key=python:S1854（这里更换成你遇到的rule信息）&organization=tinyytomato（这里更换成你测试项目的organization信息）
-            # Attention: 上述的attention是指：某个项目某次测试违反的规则，并不是该项目配置的规则
+            # Attention: 上述是指：某个项目某次测试违反的规则，并不是该项目配置的规则
             "severity": "MAJOR", //有用
             "component": "TinyyTomato_sonarcloud_test4zzy:test.py", //有用，知道github's repo名字+修改的是哪个文件（这里没有显示文件夹的原因是.py文件就在最外层，如果有文件夹嵌套那就应该类似于：/code/test.py）
             "project": "TinyyTomato_sonarcloud_test4zzy", //有用
@@ -66,6 +72,7 @@ https://sonarcloud.io/api/issues/search?projects=TinyyTomato_sonarcloud_test4zzy
             "message": "Remove this assignment to local variable \u0027t\u0027; the value is never used.", //有用。这message属性是自动生成的（由sonarcloud提供），解释了此次代码更改（code changes）的自然语言信息（正确解析之后的句子意思：移除对本地变量 't' 的赋值；该值从未被使用。）
             "effort": "1min", //看着没用
             "debt": "1min", //看着没用
+            # effort和debt有什么区别？？？？？？？？？？？？？？？？
             "assignee": "TinyyTomato@github", //看着没用（又不找人）
             "author": "1872401992@qq.com", //看着没用（也不发联系人邮箱吧）
             //这个tags代表了我此次测试的标签吧（具体查看web_api中：get api/issues/tags中的内容，有以下几个选项："tags": ["convention", "security", "cwe"]），不过我不清楚什么是unused。不过我实在没搞懂为什么会出现cwe，难道这个也能被attackers利用从而攻击？？（随便说说）
@@ -124,7 +131,7 @@ Quality profiles used
     JSON       SonarQube Way
     Python     Sonar way
     TypeScript Sonar way
-2）无敌有用：GET api/qualityprofiles/changelog：获取质量配置文件的更改历史记录：规则激活/停用、参数/严重性更改。 事件按日期降序排列（最近的在前）。
+2）超级巨无敌有用！！！：GET api/qualityprofiles/changelog：获取质量配置文件的更改历史记录：规则激活/停用、参数/严重性更改。 事件按日期降序排列（最近的在前）。
 两个例子，注意qualityProfile=后面字段的大小写问题！！：
 https://sonarcloud.io/api/qualityprofiles/changelog?qualityProfile=SonarQube%20Way&language=json&organization=microsoft
 https://sonarcloud.io/api/qualityprofiles/changelog?qualityProfile=Sonar%20way&language=py&organization=microsoft
@@ -171,9 +178,10 @@ https://sonarcloud.io/api/rules/show?key=python:S1854&organization=microsoft
 配合api_issues_searchprojects.json中的rule字段食用，key=rule，organization替换成自己想要搜索的
 但我感觉这是对一个特定规则的阐述，好像不是某个rule的细节rule，是细节rule的explanation（我自己的理解）
 
-10）无敌有用：GET api/rules/search：Search for a collection of relevant rules matching a specified query.
+10）超级巨无敌有用！！！：GET api/rules/search：Search for a collection of relevant rules matching a specified query.
 eg:
 https://sonarcloud.io/api/rules/search?avtivation=true（不要改这里，保持不动）&organization=microsoft&qprofile=AWiVr-jnwLm-hKbaiLmd（结合qualitprofiles_search.json中的key信息进行替换）
+https://sonarcloud.io/api/rules/search?organization=microsoft&languages=py
 
 11）可以进行筛选，应该有用：GET api/rules/repositories：List available rule repositories
 eg:
@@ -193,6 +201,11 @@ Quality gate used
 
 所以我感觉应该不是去研究qualitygates，你觉得呢？
 
-9 到底是rules？？还是qualityprofiles？？？
+9 到底是rules？？还是qualityprofiles？？？————解决了
 
 有用必定有用，无敌有用必定有用但不一定无敌，没用？大概率是没用，感觉没用吧？表示不确定，可能有联动的效果。
+
+
+
+# extra work：
+再测试issues：1）orignal中创建好多个issues 2）改变量名 3）delete  关注issue_id的变化，还有issues状态的变化（resolution和status），还可以看一下issues的changelog
